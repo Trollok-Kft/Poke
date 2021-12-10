@@ -8,9 +8,6 @@ class Pokemon {
         this.kepesseg = this.elem.children("p");
 
         this.setAdatok(this.adat);
-
-        
-
     }
 
     setAdatok(adat) {
