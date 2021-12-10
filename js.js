@@ -2,6 +2,11 @@ $(function(){
     const tomb=[];
     const apiVegpont="https://pokeapi.co/api/v2/pokemon/";
     const myAsszinkron=new MyAsszinkron();
+
+    const szuloElem = $("table");
+    const sablonElem = $(".sablon");
+
+    sablonElem.remove();
     
     
     $("button").on("click", function(){
@@ -11,9 +16,9 @@ $(function(){
 
     function megjelenit(tomb){
         console.log(tomb);
-        $("h2").html(tomb.name);
+        $("h2").html(tomb.forms.name);
         $("img").attr("src",tomb.sprites.front_default);
-        $("img").attr("attr",tomb.name);
+        $("img").attr("attr",tomb.forms.name);
     }
 
     function hiba(){
@@ -22,12 +27,20 @@ $(function(){
         $("img").attr("alt","hiba");
     }
 
+
     $("#rendez").click(()=>{
         $("section").append("<ul>");
         $("section").append('<li><button id="uj">Név</button></li>');
-        $("section").append('<li><button id="uj">Magasság</button></li>');
-                
-                
-            
+        $("section").append('<li><button id="uj">Magasság</button></li>');  
     });
+
+
+    $("#lista").on("click", function(){
+        tomb.forEach(function (adat) {
+            let ujElem = sablonElem.clone().appendTo(szuloElem);
+            const pokemon = new Task(ujElem, adat);
+            console.log(adat);
+        });
+    });
+
 });
