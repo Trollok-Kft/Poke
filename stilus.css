@@ -62,5 +62,7 @@ aside img{
 }
 .sablon{
     border: 1px dotted rgb(114, 165, 209);
+    border-radius: 20px;
+    margin: 1px;
     padding: 5px;
 }
