@@ -1,28 +1,26 @@
 $(function () {
   const tomb = [];
+  const tombbb = [];
   const apiVegpont = "https://pokeapi.co/api/v2/pokemon/";
   const myAsszinkron = new MyAsszinkron();
+  myAsszinkron.getAdat(apiVegpont, tomb, beolvas, hiba);
 
-  const szuloElem = $("table");
+  const szuloElem = $("body");
   const sablonElem = $(".sablon");
-
   sablonElem.remove();
 
-  $("#uj").on("click", function () {
-    //console.log(":)");
-    let szam = Math.floor(Math.random() * 1000) + 1;
-    myAsszinkron.getAdat(apiVegpont + szam, tomb, megjelenit, hiba);
-  });
-
-  function megjelenit(tomb) {
-    console.log(tomb);
-    $("article").empty();
-    $("section").empty();
-    $("article").append("<h2></2>");
-    $("article").append('<img src="" alt="">');
-    $("article h2").html(tomb.name);
-    $("article img").attr("src", tomb.sprites.front_default);
-    $("article img").attr("attr", tomb.forms.name);
+  function beolvas(tomb) {
+    console.log(tomb.results[0].url);
+    tomb.results.forEach((element) => {
+      $.ajax({
+        url: element.url,
+        success: function (r) {
+          console.log(r);
+          tombbb.push(r);
+          console.log(tombbb);
+        },
+      });
+    });
   }
 
   function hiba() {
@@ -30,6 +28,27 @@ $(function () {
     $("img").attr("src", "https://c.tenor.com/-n8JvVIqBXkAAAAM/dddd.gif");
     $("img").attr("alt", "hiba");
   }
+
+  $("#uj").on("click", function () {
+    let szam = Math.floor(Math.random() * 1000) + 1;
+    console.log(tombbb);
+    $("article").empty();
+    $("section").empty();
+    $("article").append("<h2></2>");
+    $("article").append('<img src="" alt="">');
+    $("article h2").html(tombbb.name);
+    $("article img").attr("src", tombbb.sprites.front_default);
+    $("article img").attr("attr", tombbb.forms.name);
+  });
+
+  //ne nyúlj hozzá!!
+  $("#lista").on("click", function () {
+    tombbb.forEach(function (adat) {
+      console.log("vmi");
+      let ujElem = sablonElem.clone().appendTo(szuloElem);
+      const pokemon = new Pokemon(ujElem, adat);
+    });
+  });
 
   $("#rendez").click(() => {
     console.log(":(");
@@ -47,14 +66,6 @@ $(function () {
 
     $(".magassagRendez").click(function () {
       console.log("magassag");
-    });
-  });
-
-  $("#lista").on("click", function () {
-    tomb.forEach(function (adat) {
-      let ujElem = sablonElem.clone().appendTo(szuloElem);
-      const pokemon = new Task(ujElem, adat);
-      console.log(adat);
     });
   });
 });
