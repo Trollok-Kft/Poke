@@ -31,15 +31,19 @@ $(function () {
 
   $("#uj").on("click", function () {
     let szam = Math.floor(Math.random() * 1000) + 1;
-    console.log(tombbb);
+    myAsszinkron.getAdat(apiVegpont + szam, tomb, megjelenit, hiba);
+  });
+
+  function megjelenit(tomb) {
+    console.log(tomb);
     $("article").empty();
     $("section").empty();
     $("article").append("<h2></2>");
     $("article").append('<img src="" alt="">');
-    $("article h2").html(tombbb.name);
-    $("article img").attr("src", tombbb.sprites.front_default);
-    $("article img").attr("attr", tombbb.forms.name);
-  });
+    $("article h2").html(tomb.name);
+    $("article img").attr("src", tomb.sprites.front_default);
+    $("article img").attr("attr", tomb.forms.name);
+  }
 
   //ne nyúlj hozzá!!
   $("#lista").on("click", function () {
