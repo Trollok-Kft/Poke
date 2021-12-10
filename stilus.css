@@ -20,7 +20,7 @@ button {
 }
 
 button {
-    width: 100%;
+  width: 100%;
   background-color: rgb(0, 0, 0);
   border: none;
   color: whitesmoke;
@@ -36,7 +36,6 @@ button:hover {
 }
 
 ul {
-<<<<<<< HEAD
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -50,19 +49,8 @@ li {
 section {
   padding-top: 10px;
 }
-=======
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  
-  li {
-    float: left;
-  }
-  .sablon{
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-  }
- 
->>>>>>> cd14988b18ad7108ba365a496eb866f306ae2931
+
+.sablon {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
