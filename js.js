@@ -9,6 +9,9 @@ $(function () {
   const sablonElem = $(".sablon");
   sablonElem.remove();
 
+ 
+ 
+
   function beolvas(tomb) {
     console.log(tomb.results[0].url);
     tomb.results.forEach((element) => {
@@ -72,4 +75,21 @@ $(function () {
       console.log("magassag");
     });
   });
+
+  $("#nevKeres").click(() => {
+    console.log("gomb");
+    myAsszinkron.getAdat(apiVegpont, tomb, nevLista, hiba);
+  });
+
+
+  const szuloElemNev = $(".form");
+  const sablonElemNev = $(".nev");
+  function nevLista() {
+    tombbb.forEach(function (adat) {
+      
+      $(".nev").append('<option>'+adat.name+'</option>');
+    });
+    console.log(adat);
+    console.log("megjelen");
+  }
 });

@@ -19,3 +19,19 @@ class Pokemon {
 
 
 }
+
+class Nev{
+    constructor(elem, adat){
+        this.elem = elem;
+        this.adat = adat;
+
+        this.nev = this.elem.children(".nevek");
+
+        this.setNev(this.adat);
+    }
+
+    setNev(adat) {
+        console.log(adat);
+        this.nev.html(adat.name);
+    }
+}
