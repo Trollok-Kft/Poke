@@ -61,14 +61,25 @@ $(function () {
     console.log(":(");
     $("article").empty();
     $("section").empty();
+    $("aside").empty();
     $("section").append('<button class="nevRendez">Név</button>');
     $("section").append('<button class="magassagRendez">Magasság</button>');
 
     $(".nevRendez").click(() => {
-      console.log("nev");
+      console.log("...");
       $("section").append('<div class="elem">');
-      $(".elem").append("<h2>H</h2>");
+      $(".elem").append("<h2></h2>");
       $(".elem").append('<img src="" alt="">');
+      $(".elem").append('<p class="m" src="" alt="">');
+
+      const szulo = $("section");
+      const sablon = $(".elem");
+
+      tombbb.forEach(function (adat) {
+        console.log("vmi");
+        let ujElem = sablon.clone().appendTo(szulo);
+        const pokemon = new Pokemon(ujElem, adat);
+      });
     });
 
     $(".magassagRendez").click(function () {
