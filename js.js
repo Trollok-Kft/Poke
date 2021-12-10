@@ -4,7 +4,7 @@ $(function () {
   const apiVegpont = "https://pokeapi.co/api/v2/pokemon/";
   const myAsszinkron = new MyAsszinkron();
   myAsszinkron.getAdat(apiVegpont, tomb, beolvas, hiba);
-
+  let id = 0;
   const szuloElem = $("aside");
   const sablonElem = $(".sablon");
   sablonElem.remove();
@@ -78,16 +78,16 @@ $(function () {
 
   $("#nevKeres").click(() => {
     console.log("gomb");
-    myAsszinkron.getAdat(apiVegpont, tomb, nevLista, hiba);
+   myAsszinkron.getAdat(apiVegpont , tomb, megjelenit, hiba);
   });
 
-  const szuloElemNev = $(".form");
-  const sablonElemNev = $(".nev");
+  $(".form").hide();
+
   function nevLista() {
+    $(".form").show();
     tombbb.forEach(function (adat) {
-      $(".nev").append("<option>" + adat.name + "</option>");
+      $(".nev").append("<option value=" + id + ">" + adat.name + "</option>");
+      id++;
     });
-    console.log(adat);
-    console.log("megjelen");
   }
 });
