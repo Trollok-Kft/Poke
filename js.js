@@ -55,24 +55,24 @@ $(function () {
         let ujElem = sablonElem.clone().appendTo(szuloElem);
         const pokemon = new Pokemon(ujElem, adat);
       });
+  }
+
+  $("#rendez").click(() => {
+    console.log(":(");
+    $("article").empty();
+    $("section").empty();
+    $("section").append('<button class="nevRendez">Név</button>');
+    $("section").append('<button class="magassagRendez">Magasság</button>');
+});
+    $(".nevRendez").click(() => {
+      console.log("nev");
+      $("section").append('<div class="elem">');
+      $(".elem").append("<h2>H</h2>");
+      $(".elem").append('<img src="" alt="">');
     });
-  
-    $("#rendez").click(() => {
-      console.log(":(");
-      $("article").empty();
-      $("section").empty();
-      $("section").append('<button class="nevRendez">Név</button>');
-      $("section").append('<button class="magassagRendez">Magasság</button>');
-  
-      $(".nevRendez").click(() => {
-        console.log("nev");
-        $("section").append('<div class="elem">');
-        $(".elem").append("<h2>H</h2>");
-        $(".elem").append('<img src="" alt="">');
-      });
   
       $(".magassagRendez").click(function () {
         console.log("magassag");
       });
-    });
+
   });
