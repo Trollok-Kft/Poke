@@ -50,13 +50,19 @@ section {
   padding-top: 10px;
 }
 
-.sablon {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-aside{
+aside {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     text-align: center;
+    width: 80%;
+    margin: auto;
 }
 aside img{
     margin: auto;
+}
+.sablon{
+    border: 1px dotted rgb(114, 165, 209);
+    border-radius: 20px;
+    margin: 1px;
+    padding: 5px;
 }
