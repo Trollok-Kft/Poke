@@ -5,12 +5,9 @@ $(function () {
   const myAsszinkron = new MyAsszinkron();
   myAsszinkron.getAdat(apiVegpont, tomb, beolvas, hiba);
 
-  const szuloElem = $("body");
+  const szuloElem = $("aside");
   const sablonElem = $(".sablon");
   sablonElem.remove();
-
- 
- 
 
   function beolvas(tomb) {
     console.log(tomb.results[0].url);
@@ -41,6 +38,7 @@ $(function () {
     console.log(tomb);
     $("article").empty();
     $("section").empty();
+    $("aside").empty();
     $("article").append("<h2></2>");
     $("article").append('<img src="" alt="">');
     $("article h2").html(tomb.name);
@@ -50,6 +48,8 @@ $(function () {
 
   //ne nyúlj hozzá!!
   $("#lista").on("click", function () {
+    $("article").empty();
+    $("section").empty();
     tombbb.forEach(function (adat) {
       console.log("vmi");
       let ujElem = sablonElem.clone().appendTo(szuloElem);
@@ -81,13 +81,11 @@ $(function () {
     myAsszinkron.getAdat(apiVegpont, tomb, nevLista, hiba);
   });
 
-
   const szuloElemNev = $(".form");
   const sablonElemNev = $(".nev");
   function nevLista() {
     tombbb.forEach(function (adat) {
-      
-      $(".nev").append('<option>'+adat.name+'</option>');
+      $(".nev").append("<option>" + adat.name + "</option>");
     });
     console.log(adat);
     console.log("megjelen");
