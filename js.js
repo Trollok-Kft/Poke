@@ -21,4 +21,13 @@ $(function(){
         $("img").attr("src","https://c.tenor.com/-n8JvVIqBXkAAAAM/dddd.gif");
         $("img").attr("alt","hiba");
     }
+
+    $("#rendez").click(()=>{
+        $("section").append("<ul>");
+        $("section").append('<li><button id="uj">Név</button></li>');
+        $("section").append('<li><button id="uj">Magasság</button></li>');
+                
+                
+            
+    });
 });
