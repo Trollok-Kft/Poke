@@ -6,9 +6,9 @@ class MyAsszinkron {
         url: vegpont,
         type: "GET",
         success: function (result) {
-          tomb=result;
+          tomb.push(result);
           console.log(tomb);
-          myCallback(result);
+          myCallback(tomb);
         },
         error: function(){
           myCallbackHiba();

@@ -1,10 +1,10 @@
 $(function () {
-  const tomb = [];
-  const tombbb = [];
+  const lista = [];
+  const pokemonTomb = [];
   const apiVegpont = "https://pokeapi.co/api/v2/pokemon/";
   const myAsszinkron = new MyAsszinkron();
 
-  myAsszinkron.getAdat(apiVegpont, tomb, aktPokemon, hiba);
+  myAsszinkron.getAdat(apiVegpont, lista, aktPokemon, hiba);
 
   const szuloElem = $("aside");
   const sablonElem = $(".sablon");
@@ -13,13 +13,10 @@ $(function () {
   const szulo = $("section");
   const sablon = $(".elem");
 
-  function aktPokemon(poke) {
-    for (let i = 1; i < 51; i++) {
-      /* let api = apiVegpont + i; */
-      myAsszinkron.getAdat(apiVegpont + i, tombbb, megjelenit, hiba);
-      tombbb.push(poke);
-      console.log(tombbb);
-    }
+  function aktPokemon(lista) {
+    lista[0].results.forEach((element) => {
+      myAsszinkron.getAdat(element.url, pokemonTomb, megjelenit, hiba);
+    });
   }
 
   function hiba() {
@@ -35,18 +32,27 @@ $(function () {
   }
 
   $("#uj").on("click", function () {
-    let szam = Math.floor(Math.random() * 1000) + 1;
-    myAsszinkron.getAdat(apiVegpont + szam, tomb, megjelenit, hiba);
+    let szam = Math.floor(Math.random() * pokemonTomb.length);
+    egyMegjelenit(szam);
   });
 
   function megjelenit(tomb) {
     console.log(tomb);
     torol();
+    tomb.forEach((element) => {
+      let ujElem = sablonElem.clone().appendTo(szuloElem);
+      const pokemon = new Pokemon(ujElem, element);
+    });
+  }
+
+  function egyMegjelenit(sz) {
+    torol();
     $("article").append("<h2></2>");
     $("article").append('<img src="" alt="">');
-    $("article h2").html(tomb.name);
-    $("article img").attr("src", tomb.sprites.front_default);
-    $("article img").attr("attr", tomb.forms.name);
+    console.log(Number(sz));
+    $("article h2").html(pokemonTomb[Number(sz)].name);
+    $("article img").attr("src", pokemonTomb[Number(sz)].sprites.front_default);
+    $("article img").attr("attr", pokemonTomb[Number(sz)].forms.name);
   }
 
   //ne nyúlj hozzá!!
@@ -54,11 +60,10 @@ $(function () {
     console.log("vvv");
     $("article").empty();
     $("section").empty();
-    tombbb.forEach(function (adat) {
-      console.log("vmi");
-      let ujElem = sablonElem.clone().appendTo(szuloElem);
-      const pokemon = new Pokemon(ujElem, adat);
+    pokemonTomb.sort((a, b) => {
+      return Number(a.name < b.name) - 0.5;
     });
+    megjelenit(pokemonTomb);
   });
 
   function betolt() {
@@ -72,40 +77,45 @@ $(function () {
     console.log(":(");
     torol();
     $("section").append('<button class="nevRendez">Név</button>');
-    $("section").append('<button class="magassagRendez">Magasság</button>');
+    $("section").append('<button class="magassagRendez">Súly</button>');
 
     $(".nevRendez").click(() => {
       betolt();
 
-      tombbb.sort((a, b) => {
+      pokemonTomb.sort((a, b) => {
         return Number(a.name > b.name) - 0.5;
       });
-      tombbb.forEach(function (adat) {
-        console.log("vmi");
-        let ujElem = sablon.clone().appendTo(szulo);
-        const pokemon = new Pokemon(ujElem, adat);
-      });
+      megjelenit(pokemonTomb);
     });
 
     $(".magassagRendez").click(function () {
-      tombbb.sort((a, b) => {
-        return Number(a.height > b.height) - 0.5;
+      pokemonTomb.sort((a, b) => {
+        return Number(a.weight > b.weight) - 0.5;
       });
-      tombbb.forEach(function (adat) {
-        console.log("vmi");
-        let ujElem = sablon.clone().appendTo(szulo);
-        const pokemon = new Pokemon(ujElem, adat);
-      });
+      megjelenit(pokemonTomb);
     });
   });
 
   $("#nevKeres").click(() => {
-    tombbb.forEach(function (adat) {
+    pokemonTomb.forEach(function (adat) {
       $(".nev").append(
         "<option value=" + adat.name + ">" + adat.name + "</option>"
       );
       console.log(adat);
     });
-    myAsszinkron.getAdat(apiVegpont, tomb, megjelenit, hiba);
+    for (let i = 0; i < pokemonTomb.length; i++) {
+      if (pokemonTomb[i].name === $("option").val()) {
+        egyMegjelenit(i);
+      }
+    }
+  });
+
+  $("select").change(()=>{
+    console.log("mukszik");
+    for (let i = 0; i < pokemonTomb.length; i++) {
+      if (pokemonTomb[i].name === $("select").val()) {
+        egyMegjelenit(i);
+      }
+    }
   });
 });
