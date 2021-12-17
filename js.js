@@ -3,6 +3,7 @@ $(function () {
   const tombbb = [];
   const apiVegpont = "https://pokeapi.co/api/v2/pokemon/";
   const myAsszinkron = new MyAsszinkron();
+
   myAsszinkron.getAdat(apiVegpont, tomb, aktPokemon, hiba);
 
   const szuloElem = $("aside");
